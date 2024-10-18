@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,9 +9,16 @@ export default defineConfig({
   //     '.js': 'jsx', // Configura el loader para archivos .js
   //   },
   // },
-  resolve: {
-    alias: {
-      '@src': '/src',
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler", // or "modern"
+      },
     },
   },
-})
+  resolve: {
+    alias: {
+      "@src": "/src",
+    },
+  },
+});

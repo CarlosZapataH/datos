@@ -1,0 +1,126 @@
+html,
+body,
+#root {
+	//width: 100%;
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+body.body {
+	height: 100% !important;
+}
+.MuiBox-root {
+	min-height: 100%;
+}
+.home {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@media (max-width: 600px) {
+		flex-direction: column;
+	}
+	.box-link {
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 200px;
+		height: 150px;
+		background-color: #fff;
+		border-radius: 12px;
+		margin: 10px;
+		text-decoration: none;
+		color: #000;
+		opacity: 0.6;
+		transition: 0.5s;
+		border: 1px solid #d1d1d1;
+		transition: all 0.5s;
+		&:hover {
+			color: white;
+			opacity: 1;
+			background-color: #ff7900;
+		}
+	}
+}
+
+table {
+	&.th-right {
+		th {
+			text-align: right;
+		}
+	}
+	&.th-left {
+		th {
+			text-align: left;
+		}
+	}
+}
+
+#PesonalSearch .long-text-cell {
+	white-space: initial;
+	.MuiDataGrid-cellContent {
+		max-height: 100%;
+		box-sizing: border-box;
+		overflow: auto;
+	}
+}
+
+table.custom-vertical-table {
+	width: 100%;
+	tr {
+		border-bottom: 1px solid lightgray;
+		&:last-child {
+			border: none;
+		}
+		td {
+			width: 50%;
+			font-size: 0.875rem;
+			vertical-align: top;
+			&:first-of-type {
+				color: #0039a6;
+			}
+			&:last-of-type {
+				color: grey;
+			}
+		}
+	}
+}
+
+#error-page {
+	width: 100%;
+	height: calc(100% - 16px);
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	h1 {
+		margin-top: 0;
+	}
+}
+
+.badge-danger{
+	border: 1px solid #FF2419;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 36, 25, .2);
+    color: #FF2419;
+}
+
+.badge-success{
+	border: 1px solid #2ebd75;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: rgba(46, 189, 117, .2);
+    color: #2ebd75;
+}
+
+.badge-warning{
+	border: 1px solid #ff7900;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 121, 0, .2);
+    color: #ff7900;
+}

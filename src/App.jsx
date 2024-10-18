@@ -5,7 +5,7 @@ import viteLogo from '/vite.svg'
 import { RouterProvider } from 'react-router-dom';
 //import myRoutes from './routes/routes';
 import myRoutes from '@src/routes/routes'
-import './App.css'
+// import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
