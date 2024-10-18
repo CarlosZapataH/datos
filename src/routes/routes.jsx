@@ -4,6 +4,7 @@ import ProtectedRoute from "@src/routes/protectedRoute.jsx";
 import Here from "../components/Here";
 import Dashboard from "../components/Dashboard";
 import Login from "@src/pages/login";
+import ErrorPage from "../components/global/ErrorPage/ErrorPage";
 // import Dashboard from '@src/pages/dashboard';
 // import ProfilePage from '@src/pages/profile';
 // import GeneralSearchPage from '@src/pages/search/general/GeneralSearch';
@@ -15,8 +16,8 @@ import Login from "@src/pages/login";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: /*<Login />*/ <Here />,
-    //errorElement: <ErrorPage />,
+    element: <Login />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/login",

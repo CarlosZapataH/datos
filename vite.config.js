@@ -1,8 +1,16 @@
+import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // optimizeDeps: {
+  //   include: [
+  //     '@emotion/react', 
+  //     '@emotion/styled', 
+  //     '@mui/material/Tooltip'
+  //   ],
+  // },
   plugins: [react()],
   // esbuild: {
   //   loader: {
@@ -16,9 +24,15 @@ export default defineConfig({
       },
     },
   },
+
+  // resolve: {
+  //   alias: {
+  //     "@src": "/src",
+  //   },
+  // },
   resolve: {
     alias: {
-      "@src": "/src",
+      "@src": path.resolve(__dirname, "./src"),
     },
   },
 });
