@@ -1,16 +1,15 @@
 import React from "react";
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import ProtectedRoute from "@src/routes/protectedRoute.jsx";
-import Here from "../components/Here";
-import Dashboard from "../components/Dashboard";
 import Login from "@src/pages/login";
+import Dashboard from "../components/Dashboard";
+import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "@src/routes/protectedRoute.jsx";
+import PolicyEditPage from "@src/pages/policies/PolicyEditPage";
+import PolicyListPage from "@src/pages/policies/PolicyListPage";
 import ErrorPage from "../components/global/ErrorPage/ErrorPage";
-// import Dashboard from '@src/pages/dashboard';
-// import ProfilePage from '@src/pages/profile';
-// import GeneralSearchPage from '@src/pages/search/general/GeneralSearch';
-// import PesonalSearchPage from '@src/pages/search/personal/PesonalSearch';
-// import PersonalGuestPage from '@src/pages/guest/personal/PersonalGuest.js';
-// import UserPermissionsPage from '@src/pages/user/permissions/UserPermissions.js';
+import PolicyCreatePage from "@src/pages/policies/PolicyCreatePage";
+import PolicyDetailPage from "@src/pages/policies/PolicyDetailPage";
+import PolicyPublicPage from "@src/pages/guest/policy/PolicyPublicPage";
+import UserPermissionsPage from "@src/pages/user/UserPermissionsPage";
 // import ErrorPage from '@src/components/global/ErrorPage/ErrorPage.jsx';
 
 const router = createBrowserRouter([
@@ -23,10 +22,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
-  // {
-  // 	path: '/guest/personal/:userDocument',
-  // 	element: <PersonalGuestPage />,
-  // },
+  {
+    path: "/:policyPath",
+    element: <PolicyPublicPage />,
+  },
   {
     path: "/",
     element: <ProtectedRoute />,
@@ -35,39 +34,33 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard />,
       },
-      // {
-      // 	path: '/profile',
-      // 	element: <ProfilePage />,
-      // },
-      // {
-      // 	path: '/search',
-      // 	element: <Navigate to="/search/personal" replace />,
-      // },
-      // {
-      // 	path: '/search/personal',
-      // 	element: <PesonalSearchPage />,
-      // },
-      // {
-      // 	path: '/search/general',
-      // 	element: <GeneralSearchPage />,
-      // },
-      // {
-      // 	path: '/user/permissions',
-      // 	element: <UserPermissionsPage />,
-      // },
+      {
+        path: "/dashboard/policies",
+        element: <PolicyListPage />,
+      },
+      {
+        path: "/dashboard/policies/create",
+        element: <PolicyCreatePage />,
+      },
+      {
+        path: "/dashboard/policies/:policyId",
+        element: <PolicyDetailPage />,
+      },
+      {
+        path: "/dashboard/policies/:policyId/edit",
+        element: <PolicyEditPage />,
+      },
+      {
+        path: "/dashboard/user/permissions",
+        element: <UserPermissionsPage />,
+      },
     ],
   },
 
   // {
   // 	path: '/',
   // 	element: <Root />,
-
   // },
 ]);
-
-// DELETE ROUTES
-// path: '/procedure/search',
-// path: '/procedure/upload',
-// path: '/procedure/:procedureId/detail',
 
 export default router;

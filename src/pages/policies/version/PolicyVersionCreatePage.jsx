@@ -1,35 +1,30 @@
-//import Link from 'next/link';
 import { useState } from "react";
 import Editor from "react-simple-wysiwyg";
 import { Link, useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
+import PrivateLayout from "@src/components/layout/PrivateLayout";
+import { showToastMessage } from "@src/utils/alert/toastMessage";
+import AlertError from "@src/components/global/AlertError/AlertError";
 import CustomBreadcrumbs from "@src/components/global/CustomBreadcrumbs";
-import AlertError from "@src/components/global/AlertError/AlertError.jsx";
-import { createPolicy } from "@src/features/policies/service/policies";
+import { createPolicyVersion } from "@src/features/policies/service/policies";
 import CustomLoadingButton from "@src/components/global/CustomLoadingButton/CustomLoadingButton";
-
 import {
-  Container,
   Box,
-  Typography,
-  TextField,
   Grid,
   Button,
-  FormControlLabel,
-  Checkbox,
-  CircularProgress,
+  Container,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { showToastMessage } from "@src/utils/alert/toastMessage";
-import PrivateLayout from "@src/components/layout/PrivateLayout";
-//import { showToastMessage } from '@/utils/alert/toastMessage';
 
 const breadcrumbs = [
   { value: "/dashboard", text: "Inicio" },
   { value: "/dashboard/policies", text: "Políticas" },
-  { value: "", text: "Formulario" },
+  { value: "", text: "Nueva Versión" },
 ];
 
-const PolicyCreatePage = () => {
+const PolicyVersionCreatePage = (props) => {
+  const policyId = props?.params?.policyId;
   const navigate = useNavigate();
   const [apiErrors, setApiErrors] = useState([]);
   const [loadingSave, setLoadingSave] = useState(false);
@@ -44,15 +39,13 @@ const PolicyCreatePage = () => {
     try {
       setLoadingSave(true);
       let dataBody = {
-        policy_code: data?.policy_code || null,
-        policy_version: {
-          policy_version_date: data?.policy_version_date || null,
-          version_number: data?.version_number || null,
-          content: data?.content,
-        },
+        policy_id: policyId,
+        policy_version_date: data?.policy_version_date || null,
+        content: data?.content || null,
+        version_number: data?.version_number || null,
       };
-      const response = await createPolicy(dataBody);
-      navigate(`/dashboard/policies/${response?.id}`);
+      await createPolicyVersion(dataBody);
+      navigate(`/dashboard/policies/${policyId}`, { scroll: false });
       showToastMessage({ icon: "success", text: "¡Registro exitoso!" });
     } catch (error) {
       setApiErrors(error);
@@ -63,7 +56,7 @@ const PolicyCreatePage = () => {
 
   return (
     <PrivateLayout>
-      <div id="PolicyCreatePage">
+      <div id="PolicyVersionCreatePage">
         <CustomBreadcrumbs breadcrumbs={breadcrumbs} />
         <Container>
           <Grid container justifyContent={"center"}>
@@ -76,22 +69,15 @@ const PolicyCreatePage = () => {
                 }}
               >
                 <Box mb={2}>
-                  <Typography variant="h4">Fomulario de política</Typography>
+                  <Typography variant="h4">
+                    Formulario de Nueva Versión
+                  </Typography>
                   <Typography variant="caption" mb={4}>
-                    Registre la información en el formulario
+                    Ingrese la información de la nueva versión.
                   </Typography>
                 </Box>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Box mb={2}>
-                    <TextField
-                      fullWidth
-                      label="Código"
-                      autoComplete="off"
-                      error={!!errors?.policy_code}
-                      {...register("policy_code", { required: true })}
-                    />
-                  </Box>
                   <Box mb={2}>
                     <TextField
                       fullWidth
@@ -143,7 +129,7 @@ const PolicyCreatePage = () => {
                       variant="outlined"
                       disabled={loadingSave}
                       component={Link}
-                      to={"/dashboard/policies"}
+                      href={"/dashboard/policies"}
                     >
                       Atrás
                     </Button>
@@ -162,4 +148,4 @@ const PolicyCreatePage = () => {
   );
 };
 
-export default PolicyCreatePage;
+export default PolicyVersionCreatePage;
